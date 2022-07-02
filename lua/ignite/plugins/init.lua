@@ -29,6 +29,8 @@ function M.setup(plugins)
       use(p)
     end
   end)
+
+  packer.sync()
 end
 
 return M
