@@ -15,6 +15,7 @@ function M.setup(plugins)
 
   if not utils.is_directory(install_path) then
     vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    vim.cmd("packadd packer.nvim")
   end
 
   local status_ok, packer = pcall(require, "packer")
