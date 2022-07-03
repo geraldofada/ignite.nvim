@@ -30,18 +30,20 @@ function M.cron_update(key)
   end
 
   local now = os.time(os.date("!*t"))
-  local week_in_sec = 7 * 24 * 60 * 60
 
   -- if today didn't pass the next_update
   if os.difftime(now, cron[key].next_update) < 0 then
     return false, cron[key]
   end
 
+  local sec_to_add = cron[key].recurrence_in_sec
+
   cron[key] = {
-    next_update = now + week_in_sec,
+    next_update = now + sec_to_add,
     last_update = now,
     created_at = cron[key].created_at,
     recurrence = cron[key].recurrence,
+    recurrence_in_sec = cron[key].recurrence_in_sec,
   }
 
   _save_cron_table(cron)
@@ -67,7 +69,8 @@ function M.cron_add(key, recurrence)
     next_update = now + week_in_sec,
     last_update = now,
     created_at = now,
-    recurrence = "1w"
+    recurrence = "1w",
+    recurrence_in_sec = week_in_sec,
   }
 
   _save_cron_table(cron)
