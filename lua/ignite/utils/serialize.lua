@@ -67,8 +67,6 @@ function M.deserialize_table(s)
     end
   end
 
-  P(tables[1])
-
   return tables[1]
 end
 
