@@ -1,4 +1,5 @@
 local fs = require("ignite.utils.fs")
+local core = require("ignite.core")
 
 local M = {}
 
@@ -34,7 +35,11 @@ function M.setup(plugins)
     end
   end)
 
-  -- packer.sync()
+  local created, _ = core.cron_add("packer:sync", "1w")
+  local to_update, _ = core.cron_update("packer:sync")
+  if to_update or created then
+    packer.sync()
+  end
 end
 
 return M
