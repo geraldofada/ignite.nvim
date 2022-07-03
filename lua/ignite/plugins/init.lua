@@ -1,12 +1,12 @@
-local utils = require("ignite.utils")
+local fs = require("ignite.utils.fs")
 
 local M = {}
 
 function M.setup(plugins)
-  local install_path = utils.join_paths(vim.fn.stdpath("data"), "site", "pack", "packer", "start", "packer.nvim")
-  local compile_path = utils.join_paths(vim.fn.stdpath("data"), "site", "pack", "packer", "start", "packer.nvim",
+  local install_path = fs.join_paths(vim.fn.stdpath("data"), "site", "pack", "packer", "start", "packer.nvim")
+  local compile_path = fs.join_paths(vim.fn.stdpath("data"), "site", "pack", "packer", "start", "packer.nvim",
     "compiled", "packer_compiled.lua")
-  local package_root = utils.join_paths(vim.fn.stdpath("data"), "site", "pack")
+  local package_root = fs.join_paths(vim.fn.stdpath("data"), "site", "pack")
 
   local init_opts = {
     package_root = package_root,
@@ -16,7 +16,7 @@ function M.setup(plugins)
     },
   }
 
-  if not utils.is_directory(install_path) then
+  if not fs.is_directory(install_path) then
     vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
     vim.cmd("packadd packer.nvim")
   end
@@ -34,7 +34,7 @@ function M.setup(plugins)
     end
   end)
 
-  packer.sync()
+  -- packer.sync()
 end
 
 return M
