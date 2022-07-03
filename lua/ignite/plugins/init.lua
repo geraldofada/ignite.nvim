@@ -4,10 +4,13 @@ local M = {}
 
 function M.setup(plugins)
   local install_path = utils.join_paths(vim.fn.stdpath("data"), "site", "pack", "packer", "start", "packer.nvim")
+  local compile_path = utils.join_paths(vim.fn.stdpath("data"), "site", "pack", "packer", "start", "packer.nvim",
+    "compiled", "packer_compiled.lua")
   local package_root = utils.join_paths(vim.fn.stdpath("data"), "site", "pack")
 
   local init_opts = {
     package_root = package_root,
+    compile_path = compile_path,
     git = {
       clone_timeout = 300,
     },
