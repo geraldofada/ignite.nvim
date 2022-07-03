@@ -1,6 +1,6 @@
 local M = {}
 
-function M.derialize_table(root)
+function M.serialize_table(root)
   if type(root) ~= "table" then
     error("can only serialize tables, not " .. type(root) .. "s")
   end
@@ -15,6 +15,8 @@ function M.derialize_table(root)
       ref = #refToTable
       tableToRef[t] = ref
     end
+
+    return tableToRef[t]
   end
 
   local value = function(v)
