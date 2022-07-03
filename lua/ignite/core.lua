@@ -1,0 +1,78 @@
+local fs = require("ignite.utils.fs")
+local srl = require("ignite.utils.serialize")
+
+local M = {}
+
+local cron_file_path = fs.join_paths(vim.fn.stdpath("config"), "lua", "ignite", "cron_core.tbl")
+
+-- TODO(Geraldo): ADD TESTS!!!!
+local function _get_cron_table()
+  local file_data = fs.read_file(cron_file_path)
+
+  local tbl = {}
+  if file_data ~= "" then
+    tbl = srl.deserialize_table(file_data)
+  end
+
+  return tbl
+end
+
+local function _save_cron_table(tbl)
+  local tbl_data = srl.serialize_table(tbl)
+  fs.save_file(cron_file_path, tbl_data)
+end
+
+function M.cron_update(key)
+  local cron = _get_cron_table()
+
+  if not cron[key] then
+    return false, nil
+  end
+
+  local now = os.time(os.date("!*t"))
+  local week_in_sec = 7 * 24 * 60 * 60
+
+  -- if today didn't pass the next_update
+  if os.difftime(now, cron[key].next_update) < 0 then
+    return false, cron[key]
+  end
+
+  cron[key] = {
+    next_update = now + week_in_sec,
+    last_update = now,
+    created_at = cron[key].created_at,
+    recurrence = cron[key].recurrence,
+  }
+
+  _save_cron_table(cron)
+
+  return true, cron[key]
+end
+
+-- TODO(Geraldo): create some sort of parsing to deal with the recurrence.
+-- I was thinking of something like 1w, 90s, 1h, 3d, etc etc
+--
+-- For now everything is gonna be 1 week, because that's what I need right now
+function M.cron_add(key, recurrence)
+  local cron = _get_cron_table()
+
+  if cron[key] then
+    return false, cron[key]
+  end
+
+  local now = os.time(os.date("!*t"))
+  local week_in_sec = 7 * 24 * 60 * 60
+
+  cron[key] = {
+    next_update = now + week_in_sec,
+    last_update = now,
+    created_at = now,
+    recurrence = "1w"
+  }
+
+  _save_cron_table(cron)
+
+  return true, cron[key]
+end
+
+return M
