@@ -5,10 +5,13 @@ local haskell = require("ignite.languages.haskell")
 local go = require("ignite.languages.go")
 local lua = require("ignite.languages.lua")
 local dart = require("ignite.languages.dart")
+local treesitter = require("ignite.languages.treesitter")
 
 local M = {}
 
 function M.setup()
+  require("nvim-treesitter.configs").setup(treesitter.setup())
+
   require("nvim-lsp-installer").setup({
     automatic_installation = true,
   })
