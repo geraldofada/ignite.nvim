@@ -21,7 +21,7 @@ function M.setup()
 
   require("lspconfig").gopls.setup(go.setup(general.on_attach, general.capabilities))
 
-  require("lspconfig").lua.setup(lua.setup(general.on_attach, general.capabilities))
+  require("lspconfig").sumneko_lua.setup(lua.setup(general.on_attach, general.capabilities))
 
   require("flutter-tools").setup(dart.flutter_setup(general.on_attach, general.capabilities))
 
