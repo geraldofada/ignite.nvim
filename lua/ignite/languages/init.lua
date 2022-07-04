@@ -17,8 +17,6 @@ function M.setup()
   require("lspconfig").tsserver.setup(js.ts_setup(general.on_attach, general.capabilities))
   require("lspconfig").efm.setup(js.eslint_setup(general.on_attach))
 
-  require("rust-tools").setup(rust.setup(general.on_attach, general.capabilities))
-
   require("lspconfig").hls.setup(haskell.setup(general.on_attach, general.capabilities))
 
   require("lspconfig").gopls.setup(go.setup(general.on_attach, general.capabilities))
@@ -26,6 +24,8 @@ function M.setup()
   require("lspconfig").lua.setup(lua.setup(general.on_attach, general.capabilities))
 
   require("flutter-tools").setup(dart.flutter_setup(general.on_attach, general.capabilities))
+
+  require("rust-tools").setup(rust.setup(general.on_attach, general.capabilities))
 end
 
 return M
