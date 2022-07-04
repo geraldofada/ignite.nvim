@@ -12,6 +12,7 @@ if not plugin_loader.bootstrap_ok then
 end
 
 require("ignite.fluffy").setup()
+require("ignite.discovery").setup()
 require("ignite.languages").setup()
 require("ignite.general").setup()
 require("ignite.keymaps").setup()
