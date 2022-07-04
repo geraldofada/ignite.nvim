@@ -45,6 +45,13 @@ function M.setup()
   vim.wo.foldcolumn = '1'
   vim.wo.foldlevel = 99
   vim.wo.foldenable = true
+
+  -- FLUFFY
+  vim.opt.showmode = false
+  vim.opt.scrolloff = 8
+  vim.opt.signcolumn = 'yes'
+  vim.opt.termguicolors = true
+  vim.opt.wrap = false
 end
 
 return M
