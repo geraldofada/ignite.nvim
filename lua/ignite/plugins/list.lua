@@ -42,6 +42,7 @@ local M = {
     }
   },
   { 'akinsho/flutter-tools.nvim' },
+  { 'simrat39/rust-tools.nvim' },
 
   -- fluffy
   { 'EdenEast/nightfox.nvim' },

@@ -9,13 +9,15 @@ local dart = require("ignite.languages.dart")
 local M = {}
 
 function M.setup()
-  require("nvim-lsp-installer").setup({})
+  require("nvim-lsp-installer").setup({
+    automatic_installation = true,
+  })
   require("cmp").setup(general.setup_cmp)
 
   require("lspconfig").tsserver.setup(js.ts_setup(general.on_attach, general.capabilities))
   require("lspconfig").efm.setup(js.eslint_setup(general.on_attach))
 
-  require("lspconfig").rust_analyzer.setup(rust.setup(general.on_attach, general.capabilities))
+  require("rust-tools").setup(rust.setup(general.on_attach, general.capabilities))
 
   require("lspconfig").hls.setup(haskell.setup(general.on_attach, general.capabilities))
 
