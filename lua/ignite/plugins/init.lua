@@ -3,6 +3,8 @@ local core = require("ignite.core")
 
 local M = {}
 
+M.bootstrap_ok = true
+
 function M.setup(plugins)
   local install_path = fs.join_paths(vim.fn.stdpath("data"), "site", "pack", "packer", "start", "packer.nvim")
   local compile_path = fs.join_paths(vim.fn.stdpath("data"), "site", "pack", "packer", "start", "packer.nvim",
@@ -22,24 +24,24 @@ function M.setup(plugins)
     vim.cmd("packadd packer.nvim")
   end
 
-  local status_ok, packer = pcall(require, "packer")
-  if status_ok then
-    packer.init(init_opts)
-  end
+  local packer = require("packer")
 
+  packer.init(init_opts)
   packer.reset()
 
   packer.startup(function(use)
     for _, p in pairs(plugins) do
       use(p)
     end
-  end)
 
-  local created, _ = core.cron_add("packer:sync", "1w")
-  local to_update, _ = core.cron_update("packer:sync")
-  if to_update or created then
-    packer.sync()
-  end
+    local created, _ = core.cron_add("packer:sync", "1w")
+    local to_update, _ = core.cron_update("packer:sync")
+    if created then
+      M.bootstrap_ok = false
+    elseif to_update then
+      packer.sync()
+    end
+  end)
 end
 
 return M
