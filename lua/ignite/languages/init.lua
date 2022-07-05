@@ -15,6 +15,22 @@ function M.setup()
   require("nvim-lsp-installer").setup({
     automatic_installation = true,
   })
+
+  local dapui = require("dapui")
+  local dap = require("dap")
+
+  dapui.setup()
+
+  dap.listeners.after.event_initialized["dapui_config"] = function()
+    dapui.open()
+  end
+  dap.listeners.before.event_terminated["dapui_config"] = function()
+    dapui.close()
+  end
+  dap.listeners.before.event_exited["dapui_config"] = function()
+    dapui.close()
+  end
+
   require("cmp").setup(general.setup_cmp)
 
   require("lspconfig").tsserver.setup(js.ts_setup(general.on_attach, general.capabilities))
@@ -29,6 +45,7 @@ function M.setup()
   require("flutter-tools").setup(dart.flutter_setup(general.on_attach, general.capabilities))
 
   require("rust-tools").setup(rust.setup(general.on_attach, general.capabilities))
+
 end
 
 return M

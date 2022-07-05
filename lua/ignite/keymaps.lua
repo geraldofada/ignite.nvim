@@ -26,6 +26,8 @@ function M.setup()
   _map("n", "<leader>wj", "<C-w>j")
   -- clear everything
   _map("n", "<leader>wo", "<C-w>o")
+  -- equalize
+  _map("n", "<leader>w=", "<C-w>=")
   -- maximize
   _map("n", "<leader>wm", ":MaximizerToggle!<CR>")
   -- zen mode
@@ -54,7 +56,7 @@ function M.setup()
   -- toggle between buffer
   _map("n", "<leader>bl", "<C-^>")
   -- undo tree
-  _map("n", "<F5>", ":UndotreeToggle<CR>")
+  _map("n", "<F4>", ":UndotreeToggle<CR>")
   -- git
   _map("n", "<leader>gg", ":Git<CR>")
   -- window tree
@@ -72,6 +74,17 @@ function M.setup()
   _map("n", "<leader>5", [[:lua require("harpoon.ui").nav_file(5)<CR>]]);
   _map("n", "<leader>ha", [[:lua require("harpoon.mark").add_file()<CR>]]);
   _map("n", "<leader>hh", [[:lua require("harpoon.ui").toggle_quick_menu()<CR>]]);
+
+  -- dap
+  _map("n", "<F5>", [[:lua require("dap").continue()<CR>]]);
+  _map("n", "<F6>", [[:lua require("dap").step_into()<CR>]]);
+  _map("n", "<F7>", [[:lua require("dap").step_over()<CR>]]);
+  _map("n", "<F8>", [[:lua require("dap").step_out.()<CR>]]);
+
+  _map("n", "<leader>db", [[:lua require("dap").toggle_breakpoint()<CR>]]);
+  _map("n", "<leader>dB", [[:lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>]]);
+  _map("n", "<leader>dl", [[:lua require("dap").set_breakpoint(vim.fn.input(nil, nil, "Log point message: "))<CR>]]);
+  _map("n", "<leader>dr", [[:lua require("dap").repl.open()<CR>]]);
 end
 
 return M
