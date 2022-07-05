@@ -79,7 +79,7 @@ function M.setup()
   _map("n", "<F5>", [[:lua require("dap").continue()<CR>]]);
   _map("n", "<F6>", [[:lua require("dap").step_into()<CR>]]);
   _map("n", "<F7>", [[:lua require("dap").step_over()<CR>]]);
-  _map("n", "<F8>", [[:lua require("dap").step_out.()<CR>]]);
+  _map("n", "<F8>", [[:lua require("dap").step_out()<CR>]]);
 
   _map("n", "<leader>db", [[:lua require("dap").toggle_breakpoint()<CR>]]);
   _map("n", "<leader>dB", [[:lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>]]);
