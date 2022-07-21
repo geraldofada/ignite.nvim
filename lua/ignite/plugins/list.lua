@@ -44,6 +44,7 @@ local M = {
   { "akinsho/flutter-tools.nvim" },
   { "simrat39/rust-tools.nvim" },
   { "mfussenegger/nvim-dap" },
+  { "leoluz/nvim-dap-go" },
   { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } },
 
   -- fluffy

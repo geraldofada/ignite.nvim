@@ -85,6 +85,7 @@ function M.setup()
   _map("n", "<leader>dB", [[:lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>]]);
   _map("n", "<leader>dl", [[:lua require("dap").set_breakpoint(vim.fn.input(nil, nil, "Log point message: "))<CR>]]);
   _map("n", "<leader>dr", [[:lua require("dap").repl.open()<CR>]]);
+  _map("n", "<leader>dt", [[:lua require("dap-go").debug_test()<CR>]]);
 end
 
 return M

@@ -31,6 +31,8 @@ function M.setup()
     dapui.close()
   end
 
+  go.dap_setup(require("dap-go"))
+
   require("cmp").setup(general.setup_cmp)
 
   require("lspconfig").tsserver.setup(js.ts_setup(general.on_attach, general.capabilities))
@@ -38,7 +40,7 @@ function M.setup()
 
   require("lspconfig").hls.setup(haskell.setup(general.on_attach, general.capabilities))
 
-  require("lspconfig").gopls.setup(go.setup(general.on_attach, general.capabilities))
+  require("lspconfig").gopls.setup(go.lsp_setup(general.on_attach, general.capabilities))
 
   require("lspconfig").sumneko_lua.setup(lua.setup(general.on_attach, general.capabilities))
 

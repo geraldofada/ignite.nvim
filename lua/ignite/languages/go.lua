@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup(on_attach, capabilities)
+function M.lsp_setup(on_attach, capabilities)
   return {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -13,6 +13,10 @@ function M.setup(on_attach, capabilities)
       },
     },
   }
+end
+
+function M.dap_setup(dap)
+  dap.setup()
 end
 
 return M
